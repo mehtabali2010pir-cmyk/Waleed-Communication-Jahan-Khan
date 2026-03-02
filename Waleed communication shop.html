@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waleed Communication</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --green-dark: #1a5c1a;
+    --green-mid: #2d8a2d;
+    --green-light: #3db83d;
+    --green-bright: #4cd44c;
+    --yellow: #f5c800;
+    --white: #ffffff;
+    --gray-light: #f0f0f0;
+    --gray: #888;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #fff;
+    color: #222;
+    overflow-x: hidden;
+  }
+
+  /* ── TOP BAR ── */
+  .top-bar {
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--yellow); }
+  .logo-white { color: #1a1a1a; }
+
+  .top-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .btn-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border-radius: 30px;
+    border: 2px solid var(--green-dark);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    color: #1a1a1a;
+    background: transparent;
+  }
+  .btn-pill:hover { background: var(--green-dark); color: #fff; }
+  .btn-pill.filled { background: var(--green-dark); color: #fff; }
+  .btn-pill.filled:hover { background: var(--green-mid); }
+
+  /* ── NAV ── */
+  nav {
+    background: #fff;
+    border-bottom: 2px solid #e8e8e8;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    min-height: 54px;
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+  .hamburger:hover { background: #f0f0f0; }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #333;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Desktop nav links */
+  .nav-links {
+    display: flex;
+    list-style: none;
+    flex: 1;
+    gap: 0;
+  }
+  .nav-links li a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 16px 16px;
+    text-decoration: none;
+    color: #333;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+  }
+  .nav-links li a:hover, .nav-links li a.active {
+    color: var(--green-dark);
+    border-bottom-color: var(--green-dark);
+  }
+
+  /* Search bar */
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    margin-left: auto;
+    transition: all 0.3s;
+  }
+  .search-bar input {
+    border: none;
+    background: transparent;
+    padding: 8px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    outline: none;
+    width: 180px;
+    transition: width 0.3s;
+  }
+  .search-bar button {
+    background: var(--green-dark);
+    border: none;
+    color: #fff;
+    padding: 9px 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .search-bar button:hover { background: var(--green-mid); }
+
+  /* Mobile search toggle button */
+  .search-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    margin-left: 6px;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .search-toggle:hover { background: #f0f0f0; }
+
+  /* Mobile search overlay */
+  .mobile-search {
+    display: none;
+    position: absolute;
+    top: 54px;
+    left: 0; right: 0;
+    background: #fff;
+    border-bottom: 2px solid #e8e8e8;
+    padding: 12px 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    z-index: 99;
+  }
+  .mobile-search.open { display: flex; }
+  .mobile-search input {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 6px 0 0 6px;
+    padding: 10px 14px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    background: #f5f5f5;
+  }
+  .mobile-search button {
+    background: var(--green-dark);
+    border: none;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  /* Dropdown – desktop */
+  .dropdown { position: relative; }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    min-width: 210px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    z-index: 200;
+    overflow: hidden;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 11px 18px;
+    font-size: 0.85rem;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .dropdown-menu a:hover { background: #f0faf0; color: var(--green-dark); }
+
+  /* ── MOBILE NAV DRAWER ── */
+  .mobile-nav-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 150;
+    backdrop-filter: blur(2px);
+  }
+  .mobile-nav-overlay.open { display: block; }
+
+  .mobile-drawer {
+    position: fixed;
+    top: 0; left: -280px;
+    width: 280px;
+    height: 100%;
+    background: #fff;
+    z-index: 160;
+    transition: left 0.32s cubic-bezier(0.4,0,0.2,1);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 4px 0 20px rgba(0,0,0,0.15);
+  }
+  .mobile-drawer.open { left: 0; }
+
+  .drawer-header {
+    background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
+    padding: 20px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .drawer-logo {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #fff;
+  }
+  .drawer-logo span { color: var(--yellow); }
+  .drawer-close {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: #fff;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .drawer-close:hover { background: rgba(255,255,255,0.35); }
+
+  .drawer-nav {
+    flex: 1;
+    padding: 8px 0;
+  }
+  .drawer-nav a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    text-decoration: none;
+    color: #222;
+    font-size: 0.92rem;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+  }
+  .drawer-nav a:hover, .drawer-nav a.active {
+    background: #f0faf0;
+    color: var(--green-dark);
+    border-left-color: var(--green-dark);
+  }
+  .drawer-nav a i.nav-icon {
+    width: 20px;
+    text-align: center;
+    color: var(--green-mid);
+    font-size: 0.95rem;
+  }
+
+  /* Accordion dropdowns in drawer */
+  .drawer-accordion > .drawer-acc-toggle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 20px;
+    color: #222;
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+    user-select: none;
+  }
+  .drawer-accordion > .drawer-acc-toggle:hover {
+    background: #f0faf0;
+    color: var(--green-dark);
+    border-left-color: var(--green-dark);
+  }
+  .drawer-acc-toggle .chevron {
+    margin-left: auto;
+    font-size: 0.75rem;
+    transition: transform 0.25s;
+    color: var(--gray);
+  }
+  .drawer-accordion.expanded .chevron { transform: rotate(180deg); }
+
+  .drawer-acc-content {
+    display: none;
+    background: #fafafa;
+    border-left: 3px solid var(--green-light);
+    margin-left: 0;
+  }
+  .drawer-accordion.expanded .drawer-acc-content { display: block; }
+  .drawer-acc-content a {
+    padding: 11px 20px 11px 44px;
+    font-size: 0.85rem;
+    color: #555;
+    border-left: none !important;
+  }
+  .drawer-acc-content a:hover { color: var(--green-dark); background: #f0faf0; }
+
+  .drawer-divider {
+    height: 1px;
+    background: #eee;
+    margin: 6px 0;
+  }
+
+  .drawer-footer {
+    padding: 16px 20px;
+    border-top: 1px solid #eee;
+    background: #fafafa;
+  }
+  .drawer-call {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--green-dark);
+    color: #fff;
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    transition: background 0.2s;
+  }
+  .drawer-call:hover { background: var(--green-mid); }
+
+  /* ── RESPONSIVE BREAKPOINTS ── */
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .search-toggle { display: flex; align-items: center; justify-content: center; }
+    .nav-links { display: none; }
+    .search-bar { display: none; }
+  }
+
+  /* ── HERO BANNER ── */
+  .hero {
+    background: linear-gradient(160deg, #1a6b1a 0%, #2ea82e 40%, #4cc84c 70%, #a8e063 100%);
+    padding: 50px 30px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -40px;
+    width: 250px; height: 250px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -1px;
+    line-height: 1.1;
+  }
+  .hero h1 .yellow { color: var(--yellow); }
+  .hero-urdu {
+    font-size: 1.5rem;
+    color: rgba(255,255,255,0.95);
+    margin: 8px 0 28px;
+    direction: rtl;
+    font-weight: 600;
+  }
+  .hero-divider {
+    width: 60px;
+    height: 3px;
+    background: var(--yellow);
+    margin: 0 auto 28px;
+    border-radius: 2px;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 6px;
+    font-style: italic;
+  }
+  .section-urdu {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.85);
+    direction: rtl;
+    margin-bottom: 22px;
+  }
+
+  /* Networks */
+  .networks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px 36px;
+    margin-bottom: 38px;
+  }
+  .network-badge {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 14px;
+    padding: 12px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: transform 0.2s, background 0.2s;
+    cursor: pointer;
+  }
+  .network-badge:hover { transform: translateY(-4px); background: rgba(255,255,255,0.22); }
+  .network-name {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+  .network-urdu { font-size: 0.8rem; color: rgba(255,255,255,0.8); direction: rtl; }
+  .jazz-color { color: #ff0000; }
+  .zong-color { color: #00aaff; }
+  .telenor-color { color: #00b0e8; }
+  .ufone-color { color: #009900; }
+
+  /* Accessories showcase */
+  .accessories-section {
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 28px;
+    margin: 0 auto 32px;
+    max-width: 700px;
+  }
+  .accessories-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+  }
+  .accessory-item {
+    background: rgba(255,255,255,0.18);
+    border-radius: 12px;
+    padding: 18px 14px 12px;
+    text-align: center;
+    min-width: 90px;
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+  .accessory-item:hover { transform: translateY(-5px); }
+  .accessory-item i { font-size: 2rem; color: #fff; margin-bottom: 8px; display: block; }
+  .accessory-item span { font-size: 0.75rem; color: rgba(255,255,255,0.9); font-weight: 500; }
+
+  /* CTA Buttons */
+  .cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .cta-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 26px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    background: var(--green-dark);
+    color: #fff;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+  .cta-btn:hover { background: #0f3d0f; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+  .cta-btn i { font-size: 1.1rem; }
+
+  /* ── SERVICES ── */
+  .services-section {
+    padding: 56px 30px;
+    background: #fff;
+  }
+  .section-heading {
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #222;
+    margin-bottom: 36px;
+    position: relative;
+  }
+  .section-heading::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: var(--green-mid);
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .service-card {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    padding: 32px 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  }
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    border-color: var(--green-mid);
+  }
+  .service-icon {
+    width: 70px; height: 70px;
+    background: linear-gradient(135deg, var(--green-mid), var(--green-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 1.6rem;
+    color: #fff;
+    transition: transform 0.2s;
+  }
+  .service-card:hover .service-icon { transform: scale(1.1); }
+  .service-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #222;
+  }
+
+  /* ── CALL US ── */
+  .call-section {
+    background: linear-gradient(135deg, #1a6b1a, #2ea82e);
+    padding: 28px 30px;
+    text-align: center;
+  }
+  .call-section p {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    font-style: italic;
+  }
+  .call-section span {
+    color: var(--yellow);
+    font-size: 1.4rem;
+  }
+  .call-section a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #1a1a1a;
+    padding: 48px 30px 20px;
+    color: #ccc;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr 1.4fr;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto 36px;
+  }
+  .footer-col h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 18px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: color 0.2s;
+  }
+  .footer-col ul li a:hover { color: var(--green-bright); }
+
+  .network-logos-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+  .net-tag {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .net-tag:hover { background: rgba(255,255,255,0.15); }
+  .net-tag.jazz { color: #ff4444; }
+  .net-tag.zong { color: #00aaff; }
+  .net-tag.telenor { color: #00c8e8; }
+  .net-tag.ufone { color: #66dd66; }
+
+  .contact-info p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-bottom: 10px;
+  }
+  .contact-info p i { color: var(--green-bright); width: 18px; }
+  .contact-info p strong { color: #fff; }
+  .social-links {
+    display: flex;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  .social-btn {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: #fff;
+    text-decoration: none;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .social-btn:hover { transform: scale(1.15); opacity: 0.9; }
+  .fb { background: #1877f2; }
+  .tw { background: #1da1f2; }
+  .ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+  .wa { background: #25d366; }
+
+  .footer-bottom {
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 18px;
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  /* ── DROPDOWN ── */
+  .dropdown { position: relative; }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    min-width: 200px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    z-index: 200;
+    overflow: hidden;
+  }
+  .dropdown:hover .dropdown-menu { display: block; }
+  .dropdown-menu a {
+    display: block;
+    padding: 11px 18px;
+    font-size: 0.85rem;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .dropdown-menu a:hover { background: #f0faf0; color: var(--green-dark); }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 1.8rem; }
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    .top-actions .btn-pill:first-child { display: none; }
+    .logo { font-size: 1.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="top-bar">
+  <div class="logo">
+    <span class="logo-white">Waleed </span><span>Communication</span>
+  </div>
+  <div class="top-actions">
+    <a href="#" class="btn-pill"><i class="fas fa-home"></i> Home</a>
+    <a href="tel:03130220022" class="btn-pill filled"><i class="fas fa-phone"></i> 0313-0220022</a>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <!-- Hamburger (mobile only) -->
+  <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Desktop nav links -->
+  <ul class="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li class="dropdown">
+      <a href="#">Network Loads & Packages <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:3px"></i></a>
+      <div class="dropdown-menu">
+        <a href="#"><i class="fas fa-circle" style="color:#ff4444;font-size:0.5rem"></i> Jazz Packages</a>
+        <a href="#"><i class="fas fa-circle" style="color:#00aaff;font-size:0.5rem"></i> Zong 4G Packages</a>
+        <a href="#"><i class="fas fa-circle" style="color:#00c8e8;font-size:0.5rem"></i> Telenor Packages</a>
+        <a href="#"><i class="fas fa-circle" style="color:#66dd66;font-size:0.5rem"></i> Ufone Packages</a>
+      </div>
+    </li>
+    <li class="dropdown">
+      <a href="#">Mobile Accessories <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:3px"></i></a>
+      <div class="dropdown-menu">
+        <a href="#"><i class="fas fa-plug"></i> Chargers & Cables</a>
+        <a href="#"><i class="fas fa-headphones"></i> Earphones & Headsets</a>
+        <a href="#"><i class="fas fa-mobile-alt"></i> Phone Cases & Covers</a>
+        <a href="#"><i class="fas fa-battery-full"></i> Power Banks</a>
+        <a href="#"><i class="fas fa-volume-up"></i> Bluetooth Speakers</a>
+      </div>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <!-- Desktop search -->
+  <div class="search-bar">
+    <input type="text" id="desktopSearch" placeholder="Search...">
+    <button id="desktopSearchBtn"><i class="fas fa-search"></i></button>
+  </div>
+
+  <!-- Mobile search icon -->
+  <button class="search-toggle" id="searchToggleBtn" aria-label="Search">
+    <i class="fas fa-search"></i>
+  </button>
+</nav>
+
+<!-- Mobile search bar (slides below nav) -->
+<div class="mobile-search" id="mobileSearch">
+  <input type="text" id="mobileSearchInput" placeholder="Search products, packages...">
+  <button id="mobileSearchBtn"><i class="fas fa-search"></i></button>
+</div>
+
+<!-- Mobile overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Mobile slide-in drawer -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <div class="drawer-logo">Waleed <span>Communication</span></div>
+    <button class="drawer-close" id="drawerClose"><i class="fas fa-times"></i></button>
+  </div>
+
+  <div class="drawer-nav">
+    <a href="#" class="active"><i class="fas fa-home nav-icon"></i> Home</a>
+
+    <div class="drawer-accordion" id="acc1">
+      <div class="drawer-acc-toggle">
+        <i class="fas fa-sim-card nav-icon" style="width:20px;text-align:center;color:var(--green-mid)"></i>
+        Network Loads & Packages
+        <i class="fas fa-chevron-down chevron"></i>
+      </div>
+      <div class="drawer-acc-content">
+        <a href="#"><i class="fas fa-circle" style="color:#ff4444;font-size:0.5rem"></i> Jazz Packages</a>
+        <a href="#"><i class="fas fa-circle" style="color:#00aaff;font-size:0.5rem"></i> Zong 4G Packages</a>
+        <a href="#"><i class="fas fa-circle" style="color:#00c8e8;font-size:0.5rem"></i> Telenor Packages</a>
+        <a href="#"><i class="fas fa-circle" style="color:#66dd66;font-size:0.5rem"></i> Ufone Packages</a>
+      </div>
+    </div>
+
+    <div class="drawer-accordion" id="acc2">
+      <div class="drawer-acc-toggle">
+        <i class="fas fa-mobile-alt nav-icon" style="width:20px;text-align:center;color:var(--green-mid)"></i>
+        Mobile Accessories
+        <i class="fas fa-chevron-down chevron"></i>
+      </div>
+      <div class="drawer-acc-content">
+        <a href="#"><i class="fas fa-plug"></i> Chargers & Cables</a>
+        <a href="#"><i class="fas fa-headphones"></i> Earphones & Headsets</a>
+        <a href="#"><i class="fas fa-mobile-alt"></i> Phone Cases & Covers</a>
+        <a href="#"><i class="fas fa-battery-full"></i> Power Banks</a>
+        <a href="#"><i class="fas fa-volume-up"></i> Bluetooth Speakers</a>
+      </div>
+    </div>
+
+    <div class="drawer-divider"></div>
+    <a href="#contact"><i class="fas fa-envelope nav-icon"></i> Contact</a>
+  </div>
+
+  <div class="drawer-footer">
+    <a href="tel:03130220022" class="drawer-call">
+      <i class="fas fa-phone"></i> 0313-0220022
+    </a>
+  </div>
+</div>
+
+<!-- HERO BANNER -->
+<section class="hero">
+  <h1>Waleed <span class="yellow">Communication</span></h1>
+  <p class="hero-urdu">والید کمونیکیش</p>
+  <div class="hero-divider"></div>
+
+  <p class="section-title">All Network Load & Packages</p>
+  <p class="section-urdu">ہر نیٹ ورک کے لوڈ اور پیکجز</p>
+
+  <div class="networks">
+    <div class="network-badge">
+      <span class="network-name jazz-color" style="font-style:italic;font-size:1.4rem">Jazz</span>
+      <span class="network-urdu">جاز</span>
+    </div>
+    <div class="network-badge">
+      <span class="network-name zong-color">ZONG <sup style="font-size:0.65rem;color:var(--yellow)">4G</sup></span>
+      <span class="network-urdu">زونگ</span>
+    </div>
+    <div class="network-badge">
+      <span class="network-name telenor-color">telenor</span>
+      <span class="network-urdu">ٹیل نار</span>
+    </div>
+    <div class="network-badge">
+      <span class="network-name ufone-color" style="font-size:1.3rem;font-style:italic">ufone</span>
+      <span class="network-urdu">یوفون</span>
+    </div>
+  </div>
+
+  <div class="accessories-section">
+    <p class="section-title">Mobile Accessories Available</p>
+    <p class="section-urdu">موبائل ایکسبزیبز دستیاب ہیں</p>
+    <div class="accessories-grid">
+      <div class="accessory-item"><i class="fas fa-plug"></i><span>Chargers</span></div>
+      <div class="accessory-item"><i class="fas fa-headphones"></i><span>Earphones</span></div>
+      <div class="accessory-item"><i class="fas fa-mobile-alt"></i><span>Cases</span></div>
+      <div class="accessory-item"><i class="fas fa-battery-full"></i><span>Power Banks</span></div>
+      <div class="accessory-item"><i class="fas fa-volume-up"></i><span>Speakers</span></div>
+    </div>
+  </div>
+
+  <div class="cta-buttons">
+    <a href="#" class="cta-btn"><i class="fas fa-sim-card"></i> Loads</a>
+    <a href="#" class="cta-btn"><i class="fas fa-box"></i> Packages</a>
+    <a href="#" class="cta-btn"><i class="fas fa-mobile-alt"></i> Accessories</a>
+    <a href="#contact" class="cta-btn"><i class="fas fa-phone"></i> Contact</a>
+  </div>
+</section>
+
+<!-- OUR SERVICES -->
+<section class="services-section">
+  <h2 class="section-heading">Our Services</h2>
+  <div class="services-grid">
+    <div class="service-card" onclick="alert('Loads service coming soon!')">
+      <div class="service-icon"><i class="fas fa-sim-card"></i></div>
+      <h3>Loads</h3>
+    </div>
+    <div class="service-card" onclick="alert('Packages service coming soon!')">
+      <div class="service-icon"><i class="fas fa-box-open"></i></div>
+      <h3>Packages</h3>
+    </div>
+    <div class="service-card" onclick="alert('Accessories service coming soon!')">
+      <div class="service-icon"><i class="fas fa-charging-station"></i></div>
+      <h3>Accessories</h3>
+    </div>
+    <div class="service-card" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      <div class="service-icon"><i class="fas fa-phone-alt"></i></div>
+      <h3>Contact</h3>
+    </div>
+  </div>
+</section>
+
+<!-- CALL US -->
+<section class="call-section">
+  <p><i class="fas fa-phone-volume" style="margin-right:10px"></i>Call us now &nbsp;<a href="tel:03130220022"><span>📞 0313-0220022</span></a></p>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Network Loads & Packages</a></li>
+        <li><a href="#">Mobile Accessories</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Mobile Networks</h4>
+      <div class="network-logos-footer">
+        <span class="net-tag jazz">● Jazz</span>
+        <span class="net-tag zong">ZONG 4G</span>
+        <span class="net-tag zong">ZongAG</span>
+        <span class="net-tag telenor">telenor</span>
+        <span class="net-tag ufone">ufone</span>
+        <span class="net-tag ufone">Ufone</span>
+      </div>
+    </div>
+    <div class="footer-col contact-info">
+      <h4>Get in Touch</h4>
+      <p><i class="fas fa-user"></i> <strong>Shahnawaz Mahar</strong></p>
+      <p><i class="fas fa-phone"></i> <a href="tel:03130220022" style="color:#ccc;text-decoration:none"><strong>0313-0220022</strong></a></p>
+      <p><i class="fas fa-envelope"></i> info@waleedcommunication.pk</p>
+      <div class="social-links">
+        <a href="#" class="social-btn fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-btn tw"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-btn ig"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/923130220022" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Waleed Communication. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // ── MOBILE DRAWER ──
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileDrawer = document.getElementById('mobileDrawer');
+  const navOverlay   = document.getElementById('navOverlay');
+  const drawerClose  = document.getElementById('drawerClose');
+
+  function openDrawer() {
+    mobileDrawer.classList.add('open');
+    navOverlay.classList.add('open');
+    hamburgerBtn.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeDrawer() {
+    mobileDrawer.classList.remove('open');
+    navOverlay.classList.remove('open');
+    hamburgerBtn.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  hamburgerBtn.addEventListener('click', () => mobileDrawer.classList.contains('open') ? closeDrawer() : openDrawer());
+  drawerClose.addEventListener('click', closeDrawer);
+  navOverlay.addEventListener('click', closeDrawer);
+
+  // Close drawer on nav link click
+  document.querySelectorAll('.mobile-drawer a').forEach(a => {
+    a.addEventListener('click', closeDrawer);
+  });
+
+  // ── ACCORDION in drawer ──
+  document.querySelectorAll('.drawer-accordion').forEach(acc => {
+    acc.querySelector('.drawer-acc-toggle').addEventListener('click', () => {
+      const isOpen = acc.classList.contains('expanded');
+      // close all
+      document.querySelectorAll('.drawer-accordion').forEach(a => a.classList.remove('expanded'));
+      if (!isOpen) acc.classList.add('expanded');
+    });
+  });
+
+  // ── MOBILE SEARCH TOGGLE ──
+  const searchToggleBtn = document.getElementById('searchToggleBtn');
+  const mobileSearch    = document.getElementById('mobileSearch');
+  const mobileSearchInput = document.getElementById('mobileSearchInput');
+
+  searchToggleBtn.addEventListener('click', () => {
+    const isOpen = mobileSearch.classList.contains('open');
+    mobileSearch.classList.toggle('open');
+    if (!isOpen) setTimeout(() => mobileSearchInput.focus(), 50);
+  });
+
+  // ── SEARCH HANDLERS ──
+  function doSearch(val) {
+    if (val.trim()) alert('Searching for: ' + val.trim());
+  }
+  document.getElementById('desktopSearchBtn').addEventListener('click', () => doSearch(document.getElementById('desktopSearch').value));
+  document.getElementById('desktopSearch').addEventListener('keypress', e => { if (e.key === 'Enter') doSearch(e.target.value); });
+  document.getElementById('mobileSearchBtn').addEventListener('click', () => doSearch(mobileSearchInput.value));
+  mobileSearchInput.addEventListener('keypress', e => { if (e.key === 'Enter') doSearch(e.target.value); });
+
+  // ── SMOOTH SCROLL ──
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const href = a.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // ── SERVICE CARD ANIMATIONS ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.animationDelay = (i * 0.1) + 's';
+        entry.target.classList.add('animate-in');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.service-card').forEach(card => observer.observe(card));
+
+  // Close mobile search when clicking outside
+  document.addEventListener('click', e => {
+    if (!mobileSearch.contains(e.target) && !searchToggleBtn.contains(e.target)) {
+      mobileSearch.classList.remove('open');
+    }
+  });
+</script>
+
+<style>
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.service-card { opacity: 0; }
+.service-card.animate-in { animation: fadeInUp 0.5s ease forwards; }
+
+.network-badge { animation: fadeInUp 0.6s ease both; }
+.network-badge:nth-child(1) { animation-delay: 0.1s; }
+.network-badge:nth-child(2) { animation-delay: 0.2s; }
+.network-badge:nth-child(3) { animation-delay: 0.3s; }
+.network-badge:nth-child(4) { animation-delay: 0.4s; }
+</style>
+
+</body>
+</html>
