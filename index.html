@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Waleed Communication</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="top-bar">
+  <div class="logo">
+    <span class="logo-white">Waleed </span><span>Communication</span>
+  </div>
+  <div class="top-actions">
+    <a href="#" class="btn-pill"><i class="fas fa-home"></i> Home</a>
+    <a href="tel:03130220022" class="btn-pill filled"><i class="fas fa-phone"></i> 0313-0220022</a>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <!-- Hamburger (mobile only) -->
+  <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Desktop nav links -->
+  <ul class="nav-links">
+    <li><a href="#" class="active">Home</a></li>
+    <li class="dropdown">
+      <a href="#">Network Loads & Packages <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:3px"></i></a>
+      <div class="dropdown-menu">
+        <a href="#"><i class="fas fa-circle" style="color:#ff4444;font-size:0.5rem"></i> Jazz Packages</a>
+        <a href="#"><i class="fas fa-circle" style="color:#00aaff;font-size:0.5rem"></i> Zong 4G Packages</a>
+        <a href="#"><i class="fas fa-circle" style="color:#00c8e8;font-size:0.5rem"></i> Telenor Packages</a>
+        <a href="#"><i class="fas fa-circle" style="color:#66dd66;font-size:0.5rem"></i> Ufone Packages</a>
+      </div>
+    </li>
+    <li class="dropdown">
+      <a href="#">Mobile Accessories <i class="fas fa-chevron-down" style="font-size:0.7rem;margin-left:3px"></i></a>
+      <div class="dropdown-menu">
+        <a href="#"><i class="fas fa-plug"></i> Chargers & Cables</a>
+        <a href="#"><i class="fas fa-headphones"></i> Earphones & Headsets</a>
+        <a href="#"><i class="fas fa-mobile-alt"></i> Phone Cases & Covers</a>
+        <a href="#"><i class="fas fa-battery-full"></i> Power Banks</a>
+        <a href="#"><i class="fas fa-volume-up"></i> Bluetooth Speakers</a>
+      </div>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+  <!-- Desktop search -->
+  <div class="search-bar">
+    <input type="text" id="desktopSearch" placeholder="Search...">
+    <button id="desktopSearchBtn"><i class="fas fa-search"></i></button>
+  </div>
+
+  <!-- Mobile search icon -->
+  <button class="search-toggle" id="searchToggleBtn" aria-label="Search">
+    <i class="fas fa-search"></i>
+  </button>
+</nav>
+
+<!-- Mobile search bar (slides below nav) -->
+<div class="mobile-search" id="mobileSearch">
+  <input type="text" id="mobileSearchInput" placeholder="Search products, packages...">
+  <button id="mobileSearchBtn"><i class="fas fa-search"></i></button>
+</div>
+
+<!-- Mobile overlay -->
+<div class="mobile-nav-overlay" id="navOverlay"></div>
+
+<!-- Mobile slide-in drawer -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-header">
+    <div class="drawer-logo">Waleed <span>Communication</span></div>
+    <button class="drawer-close" id="drawerClose"><i class="fas fa-times"></i></button>
+  </div>
+
+  <div class="drawer-nav">
+    <a href="#" class="active"><i class="fas fa-home nav-icon"></i> Home</a>
+
+    <div class="drawer-accordion" id="acc1">
+      <div class="drawer-acc-toggle">
+        <i class="fas fa-sim-card nav-icon" style="width:20px;text-align:center;color:var(--green-mid)"></i>
+        Network Loads & Packages
+        <i class="fas fa-chevron-down chevron"></i>
+      </div>
+      <div class="drawer-acc-content">
+        <a href="#"><i class="fas fa-circle" style="color:#ff4444;font-size:0.5rem"></i> Jazz Packages</a>
+        <a href="#"><i class="fas fa-circle" style="color:#00aaff;font-size:0.5rem"></i> Zong 4G Packages</a>
+        <a href="#"><i class="fas fa-circle" style="color:#00c8e8;font-size:0.5rem"></i> Telenor Packages</a>
+        <a href="#"><i class="fas fa-circle" style="color:#66dd66;font-size:0.5rem"></i> Ufone Packages</a>
+      </div>
+    </div>
+
+    <div class="drawer-accordion" id="acc2">
+      <div class="drawer-acc-toggle">
+        <i class="fas fa-mobile-alt nav-icon" style="width:20px;text-align:center;color:var(--green-mid)"></i>
+        Mobile Accessories
+        <i class="fas fa-chevron-down chevron"></i>
+      </div>
+      <div class="drawer-acc-content">
+        <a href="#"><i class="fas fa-plug"></i> Chargers & Cables</a>
+        <a href="#"><i class="fas fa-headphones"></i> Earphones & Headsets</a>
+        <a href="#"><i class="fas fa-mobile-alt"></i> Phone Cases & Covers</a>
+        <a href="#"><i class="fas fa-battery-full"></i> Power Banks</a>
+        <a href="#"><i class="fas fa-volume-up"></i> Bluetooth Speakers</a>
+      </div>
+    </div>
+
+    <div class="drawer-divider"></div>
+    <a href="#contact"><i class="fas fa-envelope nav-icon"></i> Contact</a>
+  </div>
+
+  <div class="drawer-footer">
+    <a href="tel:03130220022" class="drawer-call">
+      <i class="fas fa-phone"></i> 0313-0220022
+    </a>
+  </div>
+</div>
+
+<!-- HERO BANNER -->
+<section class="hero">
+  <h1>Waleed <span class="yellow">Communication</span></h1>
+  <p class="hero-urdu">والید کمونیکیش</p>
+  <div class="hero-divider"></div>
+
+  <p class="section-title">All Network Load & Packages</p>
+  <p class="section-urdu">ہر نیٹ ورک کے لوڈ اور پیکجز</p>
+
+  <div class="networks">
+    <div class="network-badge">
+      <span class="network-name jazz-color" style="font-style:italic;font-size:1.4rem">Jazz</span>
+      <span class="network-urdu">جاز</span>
+    </div>
+    <div class="network-badge">
+      <span class="network-name zong-color">ZONG <sup style="font-size:0.65rem;color:var(--yellow)">4G</sup></span>
+      <span class="network-urdu">زونگ</span>
+    </div>
+    <div class="network-badge">
+      <span class="network-name telenor-color">telenor</span>
+      <span class="network-urdu">ٹیل نار</span>
+    </div>
+    <div class="network-badge">
+      <span class="network-name ufone-color" style="font-size:1.3rem;font-style:italic">ufone</span>
+      <span class="network-urdu">یوفون</span>
+    </div>
+  </div>
+
+  <div class="accessories-section">
+    <p class="section-title">Mobile Accessories Available</p>
+    <p class="section-urdu">موبائل ایکسبزیبز دستیاب ہیں</p>
+    <div class="accessories-grid">
+      <div class="accessory-item"><i class="fas fa-plug"></i><span>Chargers</span></div>
+      <div class="accessory-item"><i class="fas fa-headphones"></i><span>Earphones</span></div>
+      <div class="accessory-item"><i class="fas fa-mobile-alt"></i><span>Cases</span></div>
+      <div class="accessory-item"><i class="fas fa-battery-full"></i><span>Power Banks</span></div>
+      <div class="accessory-item"><i class="fas fa-volume-up"></i><span>Speakers</span></div>
+    </div>
+  </div>
+
+  <div class="cta-buttons">
+    <a href="#" class="cta-btn"><i class="fas fa-sim-card"></i> Loads</a>
+    <a href="#" class="cta-btn"><i class="fas fa-box"></i> Packages</a>
+    <a href="#" class="cta-btn"><i class="fas fa-mobile-alt"></i> Accessories</a>
+    <a href="#contact" class="cta-btn"><i class="fas fa-phone"></i> Contact</a>
+  </div>
+</section>
+
+<!-- OUR SERVICES -->
+<section class="services-section">
+  <h2 class="section-heading">Our Services</h2>
+  <div class="services-grid">
+    <div class="service-card" onclick="alert('Loads service coming soon!')">
+      <div class="service-icon"><i class="fas fa-sim-card"></i></div>
+      <h3>Loads</h3>
+    </div>
+    <div class="service-card" onclick="alert('Packages service coming soon!')">
+      <div class="service-icon"><i class="fas fa-box-open"></i></div>
+      <h3>Packages</h3>
+    </div>
+    <div class="service-card" onclick="alert('Accessories service coming soon!')">
+      <div class="service-icon"><i class="fas fa-charging-station"></i></div>
+      <h3>Accessories</h3>
+    </div>
+    <div class="service-card" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+      <div class="service-icon"><i class="fas fa-phone-alt"></i></div>
+      <h3>Contact</h3>
+    </div>
+  </div>
+</section>
+
+<!-- CALL US -->
+<section class="call-section">
+  <p><i class="fas fa-phone-volume" style="margin-right:10px"></i>Call us now &nbsp;<a href="tel:03130220022"><span>📞 0313-0220022</span></a></p>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Network Loads & Packages</a></li>
+        <li><a href="#">Mobile Accessories</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Mobile Networks</h4>
+      <div class="network-logos-footer">
+        <span class="net-tag jazz">● Jazz</span>
+        <span class="net-tag zong">ZONG 4G</span>
+        <span class="net-tag zong">ZongAG</span>
+        <span class="net-tag telenor">telenor</span>
+        <span class="net-tag ufone">ufone</span>
+        <span class="net-tag ufone">Ufone</span>
+      </div>
+    </div>
+    <div class="footer-col contact-info">
+      <h4>Get in Touch</h4>
+      <p><i class="fas fa-user"></i> <strong>Shahnawaz Mahar</strong></p>
+      <p><i class="fas fa-phone"></i> <a href="tel:03130220022" style="color:#ccc;text-decoration:none"><strong>0313-0220022</strong></a></p>
+      <p><i class="fas fa-envelope"></i> info@waleedcommunication.pk</p>
+      <div class="social-links">
+        <a href="#" class="social-btn fb"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-btn tw"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-btn ig"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/923130220022" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Waleed Communication. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
